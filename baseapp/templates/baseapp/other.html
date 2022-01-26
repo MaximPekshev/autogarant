@@ -113,7 +113,8 @@
 					<p>Расходники всегда в наличии!</p>
 					<span>Нужно сделать ТО? Мы поможем!</span>
 				</div>
-				<a href="" class="au-btn btn-small" data-toggle="modal" data-target="#modalContactForm">Заказать звонок</a>
+				{% comment %} <a href="" class="au-btn btn-small" data-toggle="modal" data-target="#modalContactForm">Заказать звонок</a> {% endcomment %}
+				<a href="{% url 'show_contact_page' %}" class="au-btn btn-small">Заказать звонок</a>
 			</div>
 		</div>
 	</section>

@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from .models import SEO_data
-# from django.http import HttpResponse
+from .forms import ContactForm
+from django.contrib	import messages
+from decouple import config
+from bitrix24 import Bitrix24, BitrixError
 
 def show_index(request):
 	try:
@@ -113,6 +117,47 @@ def show_contact_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'contact_form' : ContactForm(),
 	}
 
-	return render(request, 'baseapp/contact.html', context)	
+	return render(request, 'baseapp/contact.html', context)
+
+def send_contact_form(request):
+
+	if request.method == 'POST':
+
+		contactForm = ContactForm(request.POST)
+
+		if contactForm.is_valid():
+
+			contactName = contactForm.cleaned_data['contactName']
+			contactPhone = contactForm.cleaned_data['contactPhone']
+			contactComment = contactForm.cleaned_data['contactComment']
+
+			bx24 = Bitrix24(config('BITRIX_WEBHOOK'))
+
+			try:
+				bx24.callMethod('crm.lead.add', fields={
+					'TITLE': 'Лид с сайта',
+					'NAME' : contactName,
+					'COMMENTS' : contactComment + ' --- ' + contactPhone,
+					'OPENED' : "Y",
+				})
+			except BitrixError as message:
+				pass
+				# print(message)
+
+			message = 'Форма обратной связи успешно отправлена.'
+			messages.info(request, 'Форма обратной связи успешно отправлена.')
+
+		else:
+
+			message = 'Форма обратной связи заполнена некорректно. Попробуйте еще раз.'
+			messages.info(request, 'Форма обратной связи заполнена некорректно. Попробуйте еще раз.')
+
+
+	context = {
+		'message' : message,
+		'contact_form':contactForm,
+ 	}
+	return redirect('show_contact_page')

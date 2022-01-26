@@ -8,6 +8,7 @@ from .views import show_forsunki_page
 from .views import show_tachograph_page
 from .views import show_other_page
 from .views import show_contact_page
+from .views import send_contact_form
 
 urlpatterns = [
 
@@ -20,5 +21,6 @@ urlpatterns = [
     path('tachograph/', show_tachograph_page, name='show_tachograph_page'),
     path('other/', show_other_page, name='show_other_page'),
     path('contact/', show_contact_page, name='show_contact_page'),
+    path('send-contact-form/', send_contact_form, name='send_contact_form'),
 
 ]

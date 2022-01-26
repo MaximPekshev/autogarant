@@ -41,6 +41,30 @@
 			</div>	
 		</div>
 	</section>
+
+	<section class="contact-form-section" style="padding-top: 30px;">
+		<div class="container">
+			<div class="quote-form">
+				{% for message in messages %}
+					<h3 class="special-heading">{{ message }}</h3>
+					{% comment %} <p  style="color: red;" class="text-uppercase" >* {{ message }} </p> {% endcomment %}
+				{% endfor %}
+			</div>
+		<div>
+	</section>				
+
+	{% comment %} <section>
+		<div class="container">
+			<div class="row">
+				<div class="col-12" style="text-align: center;">
+					{% for message in messages %}
+					<p  style="color: red;" class="text-uppercase" >* {{ message }} </p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	 {% endcomment %}
 	<section class="map-section">
 		<div class="container">
 			<div class="google-map-section google-map-section-v3">
@@ -68,7 +92,7 @@
 							<img src="{% static 'images/icons/contact-icon-2.png' %}" alt="icon-2">
 						</div>
 						<div class="contact-info">
-							<span class="tel"><a href="tel:79913165342">+7(991)316-53-42</a></span>
+							<span class="tel"><a href="tel:+79913165342">+7(991)316-53-42</a></span>
 							<p class="email"><a href="email:sto-gs@mail.ru">sto-gs@mail.ru</a></p>
 						</div>
 					</div>
@@ -92,25 +116,28 @@
 		<div class="container">
 			<div class="quote-form">
 				<h2 class="special-heading">СВЯЖИТЕСЬ С НАМИ</h2>
-				<form class="form-contact" method="POST" action="">
+				<form class="contact-form" method="POST" action="{% url 'send_contact_form' %}">
 					{% csrf_token %}
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 form-input">
-							<input type="text" name="name" placeholder="Ваше Имя" required="">
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-input">
+							{{ contact_form.contactName }}
 						</div>
-						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 form-input">
-							<input type="email" required="" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" name="email" placeholder="Ваш Email">
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 form-input">
-							<input type="text" name="phone" placeholder="Ваш телефон" required="">
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-input">
+							{{ contact_form.contactPhone }}
 						</div>
 						<div class="col-12 form-textarea">
-							<textarea name="message" required="" placeholder="Сообщение"></textarea>
+							{{ contact_form.contactComment }}
+						</div>
+						<div class="col-12" style="text-align: center;">
+							{% for message in messages %}
+							<p  style="color: red;" class="text-uppercase" >* {{ message }} </p>
+							{% endfor %}
 						</div>
 						<div class="col-12 form-bottom" align="right">
 							<input type="submit" class="end-quote-1 au-btn au-btn-green btn-small" name="quote" value="Отправить">
 						</div>
 					</div>
+					{{ contact_form.captcha }}
 				</form>
 			</div>
 		</div>

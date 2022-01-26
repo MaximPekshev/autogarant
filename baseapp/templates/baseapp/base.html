@@ -85,7 +85,7 @@
 						<div class="top-header-inner">
 							<span>Ремонт грузовиков и спецтехники в Белгороде</span>
 							<div>
-								<a href="tel:79913165342"><i class="fa fa-phone pr-2"></i>+7 (991) 316-53-42</a>
+								<a href="tel:+79913165342"><i class="fa fa-phone pr-2"></i>+7 (991) 316-53-42</a>
 							</div>
 						</div>
 					</div>
@@ -294,15 +294,9 @@
 								<div class="contact-detail">
 									<i class="la la-mobile-phone"></i>
 									<div class="contact-detail-inner">
-										<span><a href="tel:79913165342">Телефон: +7(991)316-53-42</a></span>
+										<span><a href="tel:+79913165342">Телефон: +7(991)316-53-42</a></span>
 									</div>
 								</div>
-								<!-- <div class="contact-detail">
-									<i class="la la-fax"></i>
-									<div class="contact-detail-inner">
-										<span>Факс: +1 23 526 8679</span>
-									</div>
-								</div> -->
 								<div class="contact-detail">
 									<i class="la la-envelope"></i>
 									<div class="contact-detail-inner">
@@ -315,12 +309,12 @@
 				</div>
 			</div>
 			<div class="sub-footer">
-				<p><span class="pr-2">2021</span> Powered by <a href="https://annasoft.ru" target="_blank">Annasoft</a>
+				<p><span class="pr-2">2021 - 2022</span> Powered by <a href="https://annasoft.ru" target="_blank">Annasoft</a>
 			</div>
 		</footer>
 
-		<div class="modal fade bd-example-modal-lg" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="modalContactLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		{% comment %} <div class="modal fade bd-example-modal-lg" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="modalContactLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg " role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="border-bottom: none;">
 						<h5 class="modal-title" id="modalContactLabel">СВЯЖИТЕСЬ С НАМИ</h5>
@@ -328,27 +322,29 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="contact-form-section">
-						<div class="container">
-							<div class="quote-form">
-								<form id="contact-form" class="form-contact" method="POST" action="">
-									{% csrf_token %}
-									<div class="row">
-										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 form-input">
-											<input type="text" name="name" placeholder="Ваше Имя" required="">
+					<div class="modal-body">
+						<div class="contact-form-section">
+							<div class="container">
+								<div class="quote-form col-lg-12 col-md-12">
+									<form id="contact-form" class="form-contact" method="POST" action="{% url 'send_contact_form' %}">
+										{% csrf_token %}
+										
+										<div class="row">
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-input">
+												{{ contact_form.contactName }}
+											</div>
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-input">
+												{{ contact_form.contactPhone }}
+											</div>
+											<div class="col-12 form-textarea">
+												{{ contact_form.contactComment }}
+											</div>
+											<div class="form-input">
+												{{ contact_form.captcha }}
+											</div>
 										</div>
-										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 form-input">
-											<input type="email" required="" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" name="email" placeholder="Ваш Email">
-										</div>
-										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 form-input">
-											<input type="text" name="phone" placeholder="Ваш телефон" required="">
-										</div>
-										<div class="col-12 form-textarea">
-											<textarea name="message" required="" placeholder="Сообщение"></textarea>
-										</div>
-
-									</div>
-								</form>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -362,7 +358,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> {% endcomment %}
 
 
 		<!-- Back To Top Button -->
