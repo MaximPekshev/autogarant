@@ -6,6 +6,8 @@ from django.contrib	import messages
 from decouple import config
 from bitrix24 import Bitrix24, BitrixError
 
+import datetime
+
 def show_index(request):
 	try:
 		seo_information = SEO_data.objects.get(page="ГЛАВНАЯ")
@@ -14,6 +16,7 @@ def show_index(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 	return render(request, 'baseapp/index.html', context)
 
@@ -26,6 +29,7 @@ def show_dvs_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/dvs.html', context)
@@ -39,6 +43,7 @@ def show_kpp_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/kpp.html', context)
@@ -52,6 +57,7 @@ def show_reductor_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/reductor.html', context)
@@ -65,6 +71,7 @@ def show_tnvd_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/tnvd.html', context)	
@@ -78,6 +85,7 @@ def show_forsunki_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/forsunki.html', context)	
@@ -91,6 +99,7 @@ def show_tachograph_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/tachograph.html', context)
@@ -104,6 +113,7 @@ def show_other_page(request):
 
 	context = {
 		'seo_information': seo_information,
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/other.html', context)
@@ -118,6 +128,7 @@ def show_contact_page(request):
 	context = {
 		'seo_information': seo_information,
 		'contact_form' : ContactForm(),
+		'actual_year': datetime.datetime.now().strftime("%Y"),
 	}
 
 	return render(request, 'baseapp/contact.html', context)
